@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab & Projects — Myles W. Peters</title>
+  <meta name="description" content="Home lab builds, study notes, and hands-on security exercises.">
+  <meta property="og:title" content="Lab & Projects — Myles W. Peters">
+  <meta property="og:description" content="IT support professional building toward a cybersecurity career.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f0862d'/%3E%3Ctext x='16' y='21' font-family='Georgia' font-size='15' font-weight='700' text-anchor='middle' fill='%232a1f24'%3EMP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,0..100&family=Outfit:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bar"></div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="dot"></span>Myles W. Peters</a>
+    <nav class="main" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="resume.html">Resume</a>
+      <a href="roadmap.html">Security Path</a>
+      <a href="projects.html">Lab &amp; Projects</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Lab &amp; Projects</div>
+    <h1>Build it, break it, <em>write it up.</em></h1>
+    <p class="lede">A running log of home-lab builds, study notes, and hands-on exercises. Newest first. Each entry links to its write-up or repo once it is published.</p>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="num">01</span><h2>Current builds</h2></div>
+    <div class="grid two">
+      <div class="card">
+        <span class="tag">In progress</span>
+        <h3>Home lab, phase 1</h3>
+        <p>Hypervisor on a repurposed desktop; Windows Server domain controller with two Windows clients and one Linux host. Goal: a documented Active Directory environment I can practice user and group administration on, then harden.</p>
+        <p><strong>Learning:</strong> AD users and OUs, Group Policy basics, DNS/DHCP, snapshots and rollback.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Studying</span>
+        <h3>CompTIA A+ notes</h3>
+        <p>Working through both A+ exams with Professor Messer’s series and practice tests. I keep a running notes file per objective domain and post the tricky ones here.</p>
+        <p><strong>Learning:</strong> hardware troubleshooting order, Windows tools (Event Viewer, Task Manager, msconfig), mobile device management basics.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="num">02</span><h2>Planned</h2><p>Queued behind the current builds</p></div>
+    <ul class="clean">
+      <li><strong>Segment the lab network.</strong> VLANs for servers, clients, and a “dirty” attack segment; document the addressing plan. (Network+ pairing.)</li>
+      <li><strong>Stand up a SIEM.</strong> Wazuh or Security Onion collecting Windows and Linux logs; baseline what normal looks like. (Security+ pairing.)</li>
+      <li><strong>Attack and detect.</strong> Run common attacks from Kali against the lab, confirm what the SIEM caught, write detection notes. (CySA+ pairing.)</li>
+      <li><strong>Automate one boring thing.</strong> A PowerShell script for bulk user creation from CSV, committed to GitHub with a README.</li>
+      <li><strong>TryHackMe SOC Level 1.</strong> Complete the path and publish room write-ups.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="callout">
+      Templates for each write-up: <strong>Goal · Setup · What happened · What I learned · What I’d do differently.</strong> Short, honest, reproducible.
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="roadmap.html">Security Path</a></li>
+          <li><a href="projects.html">Lab &amp; Projects</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:mylespeters4747@gmail.com">mylespeters4747@gmail.com</a></li>
+          <li><a href="tel:+14042856391">404-285-6391</a></li>
+          <li><a href="https://github.com/" rel="me">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/" rel="me">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Downloads</h4>
+        <ul>
+          <li><a href="assets/Myles-Peters-Resume.pdf" download>Resume (PDF)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© <span id="year">2026</span> Myles W. Peters</span>
+      <span>Built with plain HTML &amp; CSS · hosted on GitHub Pages</span>
+    </div>
+  </div>
+</footer>
+<script src="site.js"></script>
+</body>
+</html>
