@@ -58,3 +58,114 @@ git push -u origin main
 ## Theme
 
 Light by default, dark mode follows the OS and can be toggled with the ☾ button (saved in the browser). Fonts: Fraunces (display) and Outfit (body) from Google Fonts; falls back to Georgia and system sans if offline.
+
+---
+
+# Cargill Academy
+
+A self-hosted, Udemy-style cybersecurity training portal, built as static files alongside the portfolio site. Open **`academy.html`** (linked as **Academy** in the site nav). Everything runs client-side; progress is stored per-learner in the browser with JSON export/import to move between devices.
+
+## Files
+
+| File | Purpose |
+| --- | --- |
+| `academy.html` | The portal shell (catalog, course, My Learning, certifications) |
+| `academy.css` | Portal styles (layered on the shared `styles.css` tokens) |
+| `academy.js` | The whole app — routing, progress, quizzes, search, export/import (vanilla JS, no framework, no build) |
+| `curriculum.json` | **All course content**, separate from the UI so courses can be edited without touching the app |
+
+## Screens
+
+- **Catalog** — course cards grouped by phase, each with a phase/lane badge, estimated hours, mapped certification, lesson count, and a progress ring for the current learner.
+- **Course** — collapsible section sidebar with lesson checkboxes and a progress bar; the main pane shows the lesson objective, read/watch links, a hands-on lab task, and a 3–5 question self-check quiz with instant feedback and a stored score. **Mark complete** advances to the next lesson.
+- **My Learning** — enrolled courses, overall completion %, a day-streak counter, a "next up" call to action, and the year-by-year milestone checklist.
+- **Certification Tracker** — every certification in the curriculum with a status dropdown (Not started / Studying / Scheduled / Passed), an exam-date field, and cost, all saved per learner.
+- **Learner switcher** — a header dropdown (Cooper / Myles / Add learner…). All progress is keyed by learner name.
+- **Search** — across course and lesson titles, from the header.
+- **Theme** — light/dark toggle (shared with the portfolio), mobile-friendly.
+
+## How learners export / import progress
+
+Progress lives in the browser's `localStorage`, so it is per-device. To move it:
+
+1. Pick your name in the header dropdown.
+2. Click **Export** — this downloads `cargill-academy-<name>-<date>.json`.
+3. On the other device, open the portal, click **Import**, and choose that file. You'll be asked which learner to import into (defaults to the exported name).
+
+Export files hold a single learner's progress. Keep the file somewhere safe; importing overwrites that learner's current progress on the device.
+
+## How to add or edit a course
+
+All content is in `curriculum.json`. You never edit `academy.js` to change courses. Add a new object to the `courses` array:
+
+```jsonc
+{
+  "id": "unique-course-id",           // unique, kebab-case; used in URLs and progress keys
+  "title": "Course Title",
+  "phase": "p2",                       // one of the phase ids in "phases"
+  "lane": "blue",                      // all | blue | red | grc (from "lanes")
+  "certification": "secplus",          // a cert id from "certifications", or null
+  "estHours": 40,
+  "order": 3,                           // sort order within its phase
+  "summary": "One or two sentences shown on the catalog card.",
+  "prereqs": ["comptia-netplus"],       // course ids, or []
+  "outcomes": ["What the learner can do after this course", "..."],
+  "sections": [
+    {
+      "id": "unique-section-id",
+      "title": "Section Title",
+      "lessons": [
+        {
+          "id": "unique-lesson-id",
+          "title": "Lesson Title",
+          "objective": "One sentence: what this lesson teaches.",
+          "resources": [
+            { "label": "Readable link text", "url": "https://example.com/" }
+          ],
+          "lab": "A concrete hands-on task the learner performs.",
+          "quiz": [
+            {
+              "q": "A multiple-choice question?",
+              "choices": ["Wrong", "Correct", "Wrong", "Wrong"],
+              "answer": 1,                 // 0-based index of the correct choice
+              "explain": "Why the correct answer is correct (shown after answering)."
+            }
+            // 3–5 questions per lesson
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Rules the app relies on:
+
+- Every `id` (course, section, lesson) must be **unique across the whole file**.
+- Each lesson needs an `objective`, a `lab`, and a `quiz` of at least 3 questions, each with a valid `answer` index.
+- `phase`, `lane`, and `certification` must reference ids that exist in the `phases`, `lanes`, and `certifications` arrays.
+- To add a certification to the tracker, append to the `certifications` array (`id`, `name`, `vendor`, `examCodes`, `cost`, `renewal`, `lane`, optional `courseId`, optional `note`).
+
+Validate your edits before publishing (any JSON linter works). A quick check:
+
+```bash
+python3 -c "import json; json.load(open('curriculum.json')); print('valid JSON')"
+```
+
+Because the app `fetch`es `curriculum.json`, opening `academy.html` directly from disk (`file://`) is blocked by the browser. Serve the folder while editing:
+
+```bash
+python3 -m http.server 8000
+# then open http://localhost:8000/academy.html
+```
+
+## Deploy to GitHub Pages
+
+The included workflow at `.github/workflows/pages.yml` publishes the repository root (portfolio **and** the Academy) on every push to `main`.
+
+1. Push the repo to GitHub (see **Publish** above).
+2. Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Push to `main`; the workflow builds and deploys in about a minute.
+4. The Academy is then live at `…/academy.html` (and linked from the site nav).
+
+No server or database is required — it is entirely static.
