@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cargill Academy — Cybersecurity Training Portal</title>
+  <meta name="description" content="Cargill Academy: a self-paced IT and cybersecurity curriculum — home lab, CompTIA, SOC analyst, and lane certifications — with progress tracking for each learner.">
+  <meta property="og:title" content="Cargill Academy">
+  <meta property="og:description" content="A self-paced IT and cybersecurity training portal by Cargill Consulting.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f0862d'/%3E%3Ctext x='16' y='21' font-family='Georgia' font-size='14' font-weight='700' text-anchor='middle' fill='%232a1f24'%3ECA%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,0..100&family=Outfit:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="academy.css">
+</head>
+<body class="academy">
+<div class="bar"></div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="academy.html#/catalog"><span class="dot"></span>Cargill Academy</a>
+
+    <nav class="main" aria-label="Primary">
+      <a href="academy.html#/catalog" data-route="catalog">Catalog</a>
+      <a href="academy.html#/learning" data-route="learning">My Learning</a>
+      <a href="academy.html#/certs" data-route="certs">Certifications</a>
+      <a href="index.html">Myles’ site</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+    </nav>
+  </div>
+
+  <div class="wrap toolbar">
+    <div class="search-wrap">
+      <label class="sr-only" for="search">Search courses and lessons</label>
+      <input id="search" type="search" placeholder="Search courses and lessons…" autocomplete="off" spellcheck="false">
+      <div id="search-results" class="search-results" hidden></div>
+    </div>
+
+    <div class="learner-wrap">
+      <label class="sr-only" for="learner">Learner</label>
+      <select id="learner" title="Switch learner"></select>
+      <button id="export-btn" class="mini" type="button" title="Download this learner's progress as JSON">Export</button>
+      <button id="import-btn" class="mini" type="button" title="Restore progress from a JSON file">Import</button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+    </div>
+  </div>
+</header>
+
+<main id="app" class="wrap" tabindex="-1">
+  <div class="loading">Loading the curriculum…</div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Cargill Academy</h4>
+        <p>A self-paced IT and cybersecurity curriculum for the Cargill Consulting bench. Everything here runs in your browser — progress never leaves this device unless you export it.</p>
+      </div>
+      <div>
+        <h4>Portal</h4>
+        <ul>
+          <li><a href="academy.html#/catalog">Course catalog</a></li>
+          <li><a href="academy.html#/learning">My Learning</a></li>
+          <li><a href="academy.html#/certs">Certification tracker</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="index.html">Myles W. Peters</a></li>
+          <li><a href="roadmap.html">Security path</a></li>
+          <li><a href="projects.html">Lab &amp; projects</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© <span id="year"></span> Cargill Consulting</span>
+      <span>Prices and exam codes are approximate — verify with the vendor before booking.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script src="academy.js"></script>
+</body>
+</html>
